@@ -2,7 +2,7 @@
   hosts: local
   connection: local
   vars:
-    ami_id: ami-0035c836b1a01ca91
+    ami_id: ami-09c813fb71547fc4f
     sg_id: sg-0364f4d09b92c32e8 # replace with your SG ID
     zone_id: "Z0301550LQWWDFV78MXR" # replace with your ID
     domain_name: "vydevops.space"
