@@ -1,4 +1,4 @@
-- name: seto mongodb server
+- name: set mongodb server
   hosts: mongodb
   become: yes
   tasks:
