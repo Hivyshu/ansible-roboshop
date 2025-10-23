@@ -73,7 +73,7 @@
     
 
   - name: load products into ansible.db
-    ansible.builtin.shell: mongo --host mongodb.vydevops.space <app/db/master-data.js>
+    ansible.builtin.shell: mongo --host mongodb.vydevops.space <app/db/master-data.js
     when: catalogue_output.stdout | int < 0
 
   - name: start and enable catalogue
