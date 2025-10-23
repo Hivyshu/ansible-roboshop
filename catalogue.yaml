@@ -61,17 +61,18 @@
    #   register: catalogue_output
 
   
-  - name: print catalogue database
-    community.mongodb.mongodb_shell:
-      login_host: mongosh mongodb.vydevops.space
-      eval: db.getMongo().getDBNames().indexOf('catalogue')
-    register: catalogue_output
+  # - name: print catalogue database
+  #   community.mongodb.mongodb_shell:
+  #     login_host: mongosh mongodb.vydevops.space
+  #     eval: db.getMongo().getDBNames().indexOf('catalogue')
+  #   register: catalogue_output
 
   - name: print catalogue output
     ansible.builtin.debug:
       msg: "{{ catalogue_output }}"
     
 
-
+# - name: load products into ansible.db
+#   ansible.builtin.shell: mongo --host mongodb.vydevops.space <app/
 
 
