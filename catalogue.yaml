@@ -63,6 +63,7 @@
   
   - name: print catalogue database
     community.mongodb.mongodb_shell:
+      login_host: mongosh mongodb.vydevops.space
       eval: db.getMongo().getDBNames().indexOf('catalogue')
     register: catalogue_output
 
