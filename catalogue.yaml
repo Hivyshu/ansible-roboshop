@@ -56,10 +56,21 @@
       name: mongodb-mongosh
       state: present
 
-  - name: connect to mongodb catalogue
-    ansible.builtin.command: mongosh mongodb.vydevops.space --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
-    register: catalogue_output
+  # - name: connect to mongodb catalogue
+  #   ansible.builtin.command: mongosh mongodb.vydevops.space --quiet --eval "db.getMongo().getDBNames().index0f('catalogue')"
+   #   register: catalogue_output
 
-  - name: print catalogue ec2_output
+  
+  - name: print catalogue database
+    community.mongodb.mongodb_shell:
+      eval: db.getMongo().getDBNames().index0f('catalogue')
+    register: catalogue_output
+    
+  - name: print catalogue output
     ansible.builtin.debug:
       msg: "{{ catalogue_output }}"
+    
+
+
+
+
