@@ -1,0 +1,23 @@
+- name: Create Route53 record for existing instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    instance_name: "cart"
+    domain_name: "cart.vydevops.space"
+    hosted_zone: "vydevops.space"
+  tasks:
+    - name: Get EC2 instance details
+      amazon.aws.ec2_instance_info:
+        filters:
+          "tag:Name": "{{ cart }}"
+      register: ec2_info
+
+    - name: Create Route53 A record
+      amazon.aws.route53:
+        state: present
+        zone: "{{ vydevops.space }}"
+        record: "{{ cart }}"
+        type: A
+        ttl: 300
+        value: "{{ ec2_info.instances[0].34.228.78.213 }}"
