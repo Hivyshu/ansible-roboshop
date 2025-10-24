@@ -1,17 +1,15 @@
-- name: setup payment server
+- name: configure payment service
   hosts: payment
   become: yes
-  tasks:
-  - name: disable default nodejs
-    ansible.builtin.command: dnf module disable nodejs -y
-
-  - name: enable default nodejs
-    ansible.builtin.command: dnf module enable nodejs:20 -y
-
-  - name: install nodejs
-    ansible.builtin.package:
-      name: nodejs
-      state: present
+  tasks: 
+  - name: install python package
+    ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+    loop:
+      - python3
+      - gcc
+      - python3-devel
 
   - name: create roboshop system user
     ansible.builtin.user:
@@ -48,20 +46,21 @@
       dest: /app
       remote_src: yes
 
-  - name: install dependences
-    community.general.npm:
-      path: /app
+  - name: install depencencies 
+    ansible.builtin.pip:
+      requirements: requirements.txt
+      executable: 3.9
+    args:
+      chdir: /app
 
   - name: copy payment service
     ansible.builtin.copy:
         src: payment.service
         dest: /etc/systemd/system/payment.service
 
-  
   - name: daemon reload enable and start
     ansible.builtin.systemd_service:
       name: payment
       enabled: true
       state: started
       daemon_reload: true
-
