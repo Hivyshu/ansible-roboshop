@@ -63,7 +63,7 @@
         src: shipping.service
         dest: /etc/systemd/system/shipping.service
 
-  - name: inport shipping data into mysql
+  - name: import shipping data into mysql
     community.mysql.mysql_db:
       state: import
       name: all
