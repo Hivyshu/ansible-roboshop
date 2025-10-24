@@ -54,8 +54,8 @@
 
   - name: copy user service
     ansible.builtin.copy:
-        src: cart.service
-        dest: /etc/systemd/system/cart.service
+        src: user.service
+        dest: /etc/systemd/system/user.service
 
 
   - name: daemon reload enable and start
