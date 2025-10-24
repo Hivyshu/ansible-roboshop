@@ -41,12 +41,12 @@
       remote_src: yes
 
   - name: install depencencies
-    ansible.builtin.command: mvn clean package
+    ansible.builtin.command: mv clean package
     args:
       chdir: /app
  
   - name: move jar file
-    ansible.builtin.command: mvn target/shipping-1.0.jar shipping.jar
+    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
     args:
       chdir: /app
  
