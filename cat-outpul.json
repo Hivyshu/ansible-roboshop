@@ -1,0 +1,22 @@
+{
+        "changed": true,
+        "cmd": [
+            "mongosh",
+            "mongodb.vydevops.space",
+            "--quiet",
+            "--eval",
+            "db.getMongo().getDBNames().indexOf('catalogue')"
+        ],
+        "delta": "0:00:00.973990",
+        "end": "2025-10-23 10:26:38.646657",
+        "failed": false,
+        "msg": "",
+        "rc": 0,
+        "start": "2025-10-23 10:26:37.672667",
+        "stderr": "",
+        "stderr_lines": [],
+        "stdout": "1",
+        "stdout_lines": [
+            "1"
+        ]
+    }
