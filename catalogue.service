@@ -1,14 +1,14 @@
 [Unit]
-Description = Catalogue Service
+Description = cart Service
 
 [Service]
 User=roboshop
 Environment=MONGO=true
 // highlight-start
-Environment=MONGO_URL="mongodb://mongodb.vydevops.space:27017/catalogue"
+Environment=MONGO_URL="mongodb://mongodb.vydevops.space:27017/cart"
 // highlight-end
 ExecStart=/bin/node /app/server.js
-SyslogIdentifier=catalogue
+SyslogIdentifier=cart
 
 [Install]
 WantedBy=multi-user.target
