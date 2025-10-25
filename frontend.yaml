@@ -47,5 +47,5 @@
   - name: restart nginx
     ansible.builtin.service:
       name: nginx
-      stare: started # restarted if you have already started earlier
+      stare: read_privstarted # restarted if you have already started earlier
       enabled: yes
