@@ -9,9 +9,6 @@
     # we can pass instances through command line using -e
     instances: 
       - frontend
-      # - redis
-      # - mysql
-      # - rabbitmq
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
