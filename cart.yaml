@@ -39,8 +39,8 @@
 
   - name: download cart application
     ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip
-      dest: /tmp/payment.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+      dest: /tmp/cart.zip
 
   - name: extract cart applications
     ansible.builtin.unarchive:
