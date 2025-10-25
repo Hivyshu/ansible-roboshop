@@ -1,5 +1,5 @@
-- name: setup payment server
-  hosts: payment
+- name: setup catalogue server
+  hosts: catalogue
   become: yes
   tasks:
   - name: disable default nodejs
@@ -23,7 +23,7 @@
  # safe to remove directory, because 2nd time if we run it download freshly. no error if does not exist
   - name: remove app directory
     ansible.builtin.file:
-      path: /tmp/payment.zip
+      path: /tmp catalogue.zip
       state: absent
 
   - name: create app directory
@@ -31,20 +31,20 @@
       state: directory
       path: /app
 
-  - name: delete payment file
+  - name: delete catalogue file
     ansible.builtin.file:
-      path: /tmp/payment.zip
+      path: /tmp catalogue.zip
       state: absent
 
 
-  - name: download payment application
+  - name: download catalogue application
     ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip
-      dest: /tmp/payment.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com catalogue-v3.zip
+      dest: /tmp catalogue.zip
 
-  - name: extract payment applications
+  - name: extract catalogue applications
     ansible.builtin.unarchive:
-      src: /tmp/payment.zip
+      src: /tmp catalogue.zip
       dest: /app
       remote_src: yes
 
@@ -52,10 +52,10 @@
     community.general.npm:
       path: /app
 
-  - name: copy payment service
+  - name: copy catalogue service
     ansible.builtin.copy:
-        src: payment.service
-        dest: /etc/systemd/system/payment.service
+        src: catalogue.service
+        dest: /etc/systemd/system catalogue.service
 
   - name: copy mongo repo
     ansible.builtin.copy:
@@ -67,18 +67,18 @@
       name: mongodb-mongosh
       state: present
 
-  - name: connect to mongodb payment
-    ansible.builtin.command: mongosh mongodb.vydevops.space --quiet --eval "db.getMongo().getDBNames().indexOf('payment')"
+  - name: connect to mongodb catalogue
+    ansible.builtin.command: mongosh mongodb.vydevops.space --quiet --eval "db.getMongo().getDBNames().indexOf( catalogue')"
     register: payment_output
 
   
-  # - name: print payment database
+  # - name: print catalogue database
   #   community.mongodb.mongodb_shell:
   #     login_host: mongosh mongodb.vydevops.space
-  #     eval: db.getMongo().getDBNames().indexOf('payment')
+  #     eval: db.getMongo().getDBNames().indexOf( catalogue')
   #   register: payment_output
 
-  - name: print payment output
+  - name: print catalogue output
     ansible.builtin.debug:
       msg: "{{ payment_output }}"
     
@@ -87,15 +87,15 @@
     ansible.builtin.shell: mongosh --host mongodb.vydevops.space </app/db/master-data.js
     when: payment_output.stdout | int < 0
 
-  # - name: start and enable payment
+  # - name: start and enable catalogue
   #   ansible.builtin.service:
-  #     name: payment
+  #     name: catalogue
   #     enabled: yes
   #     state: started
 
   - name: daemon reload enable and start
     ansible.builtin.systemd_service:
-      name: payment
+      name: catalogue
       enabled: true
       state: started
       daemon_reload: true

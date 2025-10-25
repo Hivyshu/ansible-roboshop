@@ -1,14 +1,14 @@
 [Unit]
-Description = payment Service
+Description = catalogue Service
 
 [Service]
 User=roboshop
 Environment=MONGO=true
 // highlight-start
-Environment=MONGO_URL="mongodb://mongodb.vydevops.space:27017/payment"
+Environment=MONGO_URL="mongodb://mongodb.vydevops.space:27017/catalogue"
 // highlight-end
 ExecStart=/bin/node /app/server.js
-SyslogIdentifier=payment
+SyslogIdentifier=catalogue
 
 [Install]
 WantedBy=multi-user.target
